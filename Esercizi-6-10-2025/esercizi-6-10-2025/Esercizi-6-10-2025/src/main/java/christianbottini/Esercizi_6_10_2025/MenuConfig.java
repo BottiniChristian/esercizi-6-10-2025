@@ -73,6 +73,6 @@ public class MenuConfig {
     //Menu
     @Bean
     public Menu menu(List<Pizza> pizzas, List<Topping> toppings, List<Drink> drinks) {
-        return new Menu(pizzas, drinks, toppings);
+        return new Menu(pizzas, toppings, drinks);
     }
 }

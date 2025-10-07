@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pizza implements Item {
+public class Pizza implements MenuItem {
     private final String baseName;
     private final BigDecimal basePrice;
     private final int baseCalories;
@@ -38,6 +38,7 @@ public class Pizza implements Item {
         return baseName + " (" + toppings.stream().map(Topping::getName).reduce((a,b)->a+", "+b).orElse("") + ")";
     }
 
+    @Override
     public int getCalories() {
         return baseCalories + toppings.stream().mapToInt(Topping::getCalories).sum();
     }
