@@ -5,16 +5,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import java.math.BigDecimal;
 
 @Slf4j
 @SpringBootApplication
 public class Application {
-
     public static void main(String[] args) {
-        try (ConfigurableApplicationContext ctx =
-                     SpringApplication.run(Application.class, args)) {
+        try (ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args)) {
             Menu menu = ctx.getBean(Menu.class);
-            log.info(menu.prettyPrint());
+
+            //legge la proprietà coperto.price ed eventualmente fallback
+            String copertoStr = ctx.getEnvironment().getProperty("coperto.price", "2.50");
+            BigDecimal copertoPrice = new BigDecimal(copertoStr);
+
+            //stampa formattata con il coperto
+            System.out.println(menu.prettyPrint(copertoPrice));
         }
     }
 }
